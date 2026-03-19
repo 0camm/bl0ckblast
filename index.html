@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Block Blast</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="full-screen" content="yes">
+  <meta name="screen-orientation" content="portrait">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+
+    #GameDiv {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #Cocos3dGameContainer, canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    #LoadingIndicator {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    .spinner {
+      border: 4px solid #444;
+      border-top: 4px solid #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="GameDiv">
+    <div id="LoadingIndicator">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+
+    <div id="Cocos3dGameContainer">
+      <canvas id="GameCanvas" tabindex="99"></canvas>
+    </div>
+  </div>
+
+  <script src="src/polyfills.bundle.js"></script>
+  <script src="src/system.bundle.js"></script>
+  <script src="src/import-map.json" type="systemjs-importmap"></script>
+
+  <script>
+    System.import('./index.js')
+      .catch(function(err) { console.error(err); })
+      .finally(function() {
+        document.getElementById('LoadingIndicator').style.display = 'none';
+      });
+  </script>
+</body>
+</html>
